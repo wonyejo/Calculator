@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Data; //Binding
+using System.Windows.Controls.Primitives;
 
 namespace WpfApp1
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// App.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            Binding binding = new Binding("Text"); //바인딩 객체 생성 (src의 attribute)
+            binding.Source = txt;
+            //binding.Path = new PropertyPath(TextBox.TextProperty);
+            label.SetBinding(Label.ContentProperty, binding);
+            //Target요소.SetBinding(속성, 바인딩객체)
         }
+
     }
 }
+
