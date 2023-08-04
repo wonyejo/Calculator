@@ -12,13 +12,11 @@ namespace WpfApp1
     {
         public MainWindow()
         {
-            InitializeComponent();
-            Binding binding = new Binding("Text"); //바인딩 객체 생성 (src의 attribute)
-            binding.Source = txt;
-            //binding.Path = new PropertyPath(TextBox.TextProperty);
-            label.SetBinding(Label.ContentProperty, binding);
-            //Target요소.SetBinding(속성, 바인딩객체)
+            InitializeComponent(); // 디자이너단에 정의된 Form컴포넌트 정의를 호출
+           
         }
+
+
 
     }
 }
