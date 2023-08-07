@@ -27,7 +27,7 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Contact.xaml", UriKind.Relative)); //버튼을 눌렀을 때 이 쪽으로 이동하게 하는 것
+            NavigationService.Navigate(new Uri("/Contact.xaml", UriKind.Relative)); //버튼을 눌렀을 때 이 쪽으로 
         }
     }
 }
