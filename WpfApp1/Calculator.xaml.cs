@@ -20,11 +20,15 @@ namespace WpfApp1
     /// </summary>
     public partial class Calculator : Page
     {
+        private int L_Operand;
+        private int R_Operand;
+       
+
         public Calculator()
         {
             InitializeComponent();
         }
-
+       
         /*
         * @brief 숫자 버튼을 누르면 InputTextBox에 해당 숫자가 입력됩니다.  
         * @param sender: 어떤 버튼이 클릭되었는지, e: 해당 이벤트에 대한 정보
@@ -52,7 +56,31 @@ namespace WpfApp1
         {
             Button clickedButton = (Button)sender;
             string Oper = clickedButton.Content.ToString();
+            if (Oper == "x")
+            {
+                
+            }
+            else if(Oper == "/")
+            {
+
+            }
+            else if(Oper == "-")
+            {
+
+            }
+            else if(Oper == "+")
+            {
+
+            }
+            else if(Oper == "=")
+            {
+
+            }
+
+            L_Operand = int.Parse(InputTextBox.Text);
             ResultTextBox.Text += InputTextBox.Text+Oper;
+            
+            InputTextBox.Text = "";
 
         }
     }
