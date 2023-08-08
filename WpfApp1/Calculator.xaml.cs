@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
+
     /// <summary>
     /// Calculator.xaml에 대한 상호 작용 논리
     /// </summary>
@@ -22,7 +23,9 @@ namespace WpfApp1
     {
         private int L_Operand;
         private int R_Operand;
-       
+        private int result;
+        private string Operator;
+
 
         public Calculator()
         {
@@ -56,32 +59,48 @@ namespace WpfApp1
         {
             Button clickedButton = (Button)sender;
             string Oper = clickedButton.Content.ToString();
-            if (Oper == "x")
-            {
-                
-            }
-            else if(Oper == "/")
-            {
-
-            }
-            else if(Oper == "-")
-            {
-
-            }
-            else if(Oper == "+")
-            {
-
-            }
-            else if(Oper == "=")
-            {
-
-            }
-
+            Operator = Oper;
             L_Operand = int.Parse(InputTextBox.Text);
-            ResultTextBox.Text += InputTextBox.Text+Oper;
-            
-            InputTextBox.Text = "";
+            ResultTextBox.Text += InputTextBox.Text + Oper;
 
+            InputTextBox.Text = "";
+           
+
+            
+
+
+
+        }
+
+        private void Result_Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            R_Operand = int.Parse(InputTextBox.Text);
+            ResultTextBox.Text += R_Operand + " = ";
+            if (Operator == "/")
+            {
+                result = L_Operand / R_Operand;
+                InputTextBox.Text = result.ToString();
+            }
+            else if (Operator == "-")
+            {
+                result = L_Operand - R_Operand;
+                InputTextBox.Text = result.ToString();
+            }
+            else if (Operator == "+")
+            {
+                result = L_Operand + R_Operand;
+                InputTextBox.Text = result.ToString();
+            }
+            else if (Operator == "x")
+            {
+                result = L_Operand * R_Operand;
+                InputTextBox.Text = result.ToString();
+
+            }
+            
+
+            
         }
     }
 }

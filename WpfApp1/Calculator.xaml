@@ -36,7 +36,7 @@
             <Button Content="x" Click="Operator_Button_Click"/>
             <Button Content="-" Click="Operator_Button_Click"/>
             <Button Content="+" Click="Operator_Button_Click"/>
-            <Button Content="=" Background="LightGreen" />
+            <Button Content="=" Background="LightGreen" Click="Result_Button_Click" />
 
         </StackPanel>
         
