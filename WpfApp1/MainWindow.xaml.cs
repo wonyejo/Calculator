@@ -13,7 +13,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent(); // 디자이너단에 정의된 Form컴포넌트 정의를 호출
-           
+            DataContext = new CalculatorViewModel();
         }
 
 

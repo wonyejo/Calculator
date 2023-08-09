@@ -19,7 +19,7 @@
                   HorizontalAlignment="Left" 
                   Height="48" 
                   Margin="22,121,0,0" 
-                  TextWrapping="Wrap" Text="{Binding InputTxt}" 
+                  TextWrapping="Wrap" Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                   VerticalAlignment="Top" 
                   Width="253"/>
 
@@ -42,10 +42,10 @@
             <Button Content="." />
         </WrapPanel>
         <StackPanel HorizontalAlignment="Left" Height="182" VerticalAlignment="Top" Width="80" Margin="212,185,0,0">
-            <Button Content="/" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="/" />
-            <Button Content="x" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="x"/>
-            <Button Content="-" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="-"/>
-            <Button Content="+" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="+"/>
+            <Button Content="/" Command="{Binding OperatorButtonCommand}" CommandParameter="/" />
+            <Button Content="x" Command="{Binding OperatorButtonCommand}" CommandParameter="x"/>
+            <Button Content="-" Command="{Binding OperatorButtonCommand}" CommandParameter="-"/>
+            <Button Content="+" Command="{Binding OperatorButtonCommand}" CommandParameter="+"/>
             <Button Content="=" Background="LightGreen" Click="Result_Button_Click" />
 
         </StackPanel>
