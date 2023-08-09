@@ -8,34 +8,44 @@
       d:DesignHeight="400"
       d:DesignWidth="300"
       Title="Calculator">
-
+    <Page.DataContext>
+        <local:CalculatorViewModel/>
+    </Page.DataContext>
+    
     <Grid>
         <TextBox x:Name="ResultTextBox" TextAlignment="Right" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="253" Margin="22,93,0,0"/>
-        <TextBox  x:Name="InputTextBox" TextAlignment="Right" HorizontalAlignment="Left" Height="48" Margin="22,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="253"/>
+        <TextBox  x:Name="InputTextBox" 
+                  TextAlignment="Right" 
+                  HorizontalAlignment="Left" 
+                  Height="48" 
+                  Margin="22,121,0,0" 
+                  TextWrapping="Wrap" Text="{Binding InputTxt}" 
+                  VerticalAlignment="Top" 
+                  Width="253"/>
 
         <WrapPanel HorizontalAlignment="Left" Height="180" Margin="22,185,0,0" VerticalAlignment="Top" Width="190" RenderTransformOrigin="0.5,0.5">
            
             <Button Content="%"   />
             <Button Content="CE" />
             <Button Content="C" />
-            <Button Content="7" Click="NumberButton_Click"   />
-            <Button Content="8" Click="NumberButton_Click"/>
-            <Button Content="9" Click="NumberButton_Click" />
-            <Button Content="4" Click="NumberButton_Click"/>
-            <Button Content="5" Click="NumberButton_Click"/>
-            <Button Content="6" Click="NumberButton_Click" />
-            <Button Content="1" Click="NumberButton_Click" />
-            <Button Content="2" Click="NumberButton_Click" />
-            <Button Content="3" Click="NumberButton_Click" />
+            <Button Content="7" Command="{Binding NumberButtonCommand}" CommandParameter="7"   />
+            <Button Content="8"  Command="{Binding NumberButtonCommand}" CommandParameter="8" />
+            <Button Content="9"  Command="{Binding NumberButtonCommand}" CommandParameter="9" />
+            <Button Content="4"  Command="{Binding NumberButtonCommand}" CommandParameter="4" />
+            <Button Content="5"  Command="{Binding NumberButtonCommand}" CommandParameter="5" />
+            <Button Content="6"  Command="{Binding NumberButtonCommand}" CommandParameter="6"  />
+            <Button Content="1"  Command="{Binding NumberButtonCommand}" CommandParameter="1"  />
+            <Button Content="2" Command="{Binding NumberButtonCommand}" CommandParameter="2"  />
+            <Button Content="3"  Command="{Binding NumberButtonCommand}" CommandParameter="3"  />
             <Button Content="+/-"  />
-            <Button Content="0" Click="NumberButton_Click" />
+            <Button Content="0"  Command="{Binding NumberButtonCommand}" CommandParameter="0"  />
             <Button Content="." />
         </WrapPanel>
         <StackPanel HorizontalAlignment="Left" Height="182" VerticalAlignment="Top" Width="80" Margin="212,185,0,0">
-            <Button Content="/" Click="Operator_Button_Click" />
-            <Button Content="x" Click="Operator_Button_Click"/>
-            <Button Content="-" Click="Operator_Button_Click"/>
-            <Button Content="+" Click="Operator_Button_Click"/>
+            <Button Content="/" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="/" />
+            <Button Content="x" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="x"/>
+            <Button Content="-" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="-"/>
+            <Button Content="+" Command="{Binding OperatorButtonCommandExecute}" CommandParameter="+"/>
             <Button Content="=" Background="LightGreen" Click="Result_Button_Click" />
 
         </StackPanel>

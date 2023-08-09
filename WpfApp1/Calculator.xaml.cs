@@ -25,8 +25,7 @@ namespace WpfApp1
         private int R_Operand;
         private int result;
         private string Operator;
-
-
+        
         public Calculator()
         {
             InitializeComponent();
@@ -66,10 +65,6 @@ namespace WpfApp1
             InputTextBox.Text = "";
            
 
-            
-
-
-
         }
 
         private void Result_Button_Click(object sender, RoutedEventArgs e)
@@ -77,10 +72,12 @@ namespace WpfApp1
             
             R_Operand = int.Parse(InputTextBox.Text);
             ResultTextBox.Text += R_Operand + " = ";
+            
             if (Operator == "/")
             {
                 result = L_Operand / R_Operand;
                 InputTextBox.Text = result.ToString();
+
             }
             else if (Operator == "-")
             {

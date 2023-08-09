@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="300">
+
+   
     <Grid>
-        <Frame Source="/Calculator.xaml"/>
+        <Frame Source="Calculator.xaml"/>
+
     </Grid>
 </Window>
