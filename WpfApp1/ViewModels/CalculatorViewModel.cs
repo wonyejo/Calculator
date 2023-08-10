@@ -19,13 +19,13 @@ namespace WpfApp1
         #endregion
 
         #region [필드]
-        private double leftOperand;
-        private double rightOperand;
-        private double result;
+        private decimal leftOperand;
+        private decimal rightOperand;
+        private decimal result;
         private string Operator;
         private string inputText = "";
         private string resultText = "";
-        private bool decimalPointEntered = false;
+        private bool doublePointEntered = false;
         #endregion
 
         #region [속성]
@@ -80,10 +80,10 @@ namespace WpfApp1
             {
                 if (number == ".")
                 {
-                    if (!decimalPointEntered)
+                    if (!doublePointEntered)
                     {
                         InputText = $"{inputText}{number}";
-                        decimalPointEntered = true;
+                        doublePointEntered = true;
                     }
                 }
                 else
@@ -104,10 +104,10 @@ namespace WpfApp1
 
         private void OperatorButtonCommandExecute(object parameter)
         {
-            decimalPointEntered = false;
+            doublePointEntered = false;
             if (string.IsNullOrEmpty(Operator))
             {
-                leftOperand = double.Parse(inputText);
+                leftOperand = decimal.Parse(inputText);
                 ResultText = $"{leftOperand}{parameter}";
                 Operator = parameter.ToString();
                 inputText = "";
@@ -126,19 +126,19 @@ namespace WpfApp1
             {
             if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(Operator))
             {
-                rightOperand = double.Parse(inputText);
+                rightOperand = decimal.Parse(inputText);
                 ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
 
                 if (Operator == "/")
                 {
-                    
+           
                     result = leftOperand / rightOperand;
                     InputText = result.ToString();
                     if (rightOperand == 0)
                     {
                         ResultText = "Error: Divide by zero";
 
-                        
+
                     }
                 }
                 else if (Operator == "-")
@@ -179,7 +179,7 @@ namespace WpfApp1
             leftOperand = 0;
             rightOperand = 0;
             Operator = "";
-            decimalPointEntered = false;
+            doublePointEntered = false;
         }
         /*
         * @brief 바뀐 프로퍼티가 있으면 그 변화를 반영합니다.  
