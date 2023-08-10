@@ -11,6 +11,7 @@ namespace WpfApp1
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
+       
         private readonly Func<bool> _canExecute;
 
         public RelayCommand(Action<object> execute, Func<bool> canExecute = null)
@@ -28,7 +29,7 @@ namespace WpfApp1
         {
             _execute(parameter);
         }
-
+      
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

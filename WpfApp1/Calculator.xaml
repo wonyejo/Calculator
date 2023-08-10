@@ -13,21 +13,27 @@
     </Page.DataContext>
     
     <Grid>
-        <TextBox x:Name="ResultTextBox" TextAlignment="Right" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="253" Margin="22,93,0,0"/>
+        <TextBox x:Name="ResultTextBox" 
+				 TextAlignment="Right" 
+				 HorizontalAlignment="Left"
+				 Width="253" Height="23"
+				 TextWrapping="Wrap" Text="{Binding ResultText, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+				 VerticalAlignment="Top"
+				 Margin="22,93,0,0"/>
+		
         <TextBox  x:Name="InputTextBox" 
                   TextAlignment="Right" 
                   HorizontalAlignment="Left" 
-                  Height="48" 
+                  Width="253" Height="48" 
                   Margin="22,121,0,0" 
                   TextWrapping="Wrap" Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                  VerticalAlignment="Top" 
-                  Width="253"/>
+                  VerticalAlignment="Top" />
 
         <WrapPanel HorizontalAlignment="Left" Height="180" Margin="22,185,0,0" VerticalAlignment="Top" Width="190" RenderTransformOrigin="0.5,0.5">
            
             <Button Content="%"   />
             <Button Content="CE" />
-            <Button Content="C" />
+            <Button Content="C" Command="{Binding ClearButtonCommand}" />
             <Button Content="7" Command="{Binding NumberButtonCommand}" CommandParameter="7"   />
             <Button Content="8"  Command="{Binding NumberButtonCommand}" CommandParameter="8" />
             <Button Content="9"  Command="{Binding NumberButtonCommand}" CommandParameter="9" />
@@ -46,7 +52,7 @@
             <Button Content="x" Command="{Binding OperatorButtonCommand}" CommandParameter="x"/>
             <Button Content="-" Command="{Binding OperatorButtonCommand}" CommandParameter="-"/>
             <Button Content="+" Command="{Binding OperatorButtonCommand}" CommandParameter="+"/>
-            <Button Content="=" Background="LightGreen" Click="Result_Button_Click" />
+            <Button Content="=" Background="LightGreen" Command="{Binding ResultButtonCommand}" />
 
         </StackPanel>
         
