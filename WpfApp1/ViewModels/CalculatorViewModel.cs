@@ -67,7 +67,14 @@ namespace WpfApp1
         #endregion
 
         #region [메서드]
-
+        /*
+        * @brief 숫자 버튼을 누르면 InputTextBox에 해당 숫자가 입력됩니다.  
+        * @param parameter: 누른 숫자의 값
+        * @return 반환값 없음
+        * @note Patch-notes
+        * 2023-08-10|조예원|설명작성
+        * @warning 없음
+        */
         private void NumberButtonCommandExecute(object parameter)
         {
             if (parameter is string number)
@@ -87,51 +94,86 @@ namespace WpfApp1
             }
         }
 
+        /*
+        * @brief 연산자 버튼을 누르면 ResultTextBox에 피연산자와 연산자가 입력됩니다.  
+        * @param parameter: 누른 연산자의 값
+        * @return 반환값 없음
+        * @note Patch-notes
+        * 2023-08-10|조예원|설명작성
+        * @warning 없음
+        */
+
+       
 
         private void OperatorButtonCommandExecute(object parameter)
         {
-
-            leftOperand = double.Parse(inputText);
-            ResultText = $"{inputText}{parameter}";
-            Operator = parameter.ToString();
-            decimalPointEntered = false; // 연산자가 입력될 때 소수점 허용 플래그 초기화
-            inputText = "";
-
+            if (string.IsNullOrEmpty(Operator))
+            {
+                leftOperand = double.Parse(inputText);
+                ResultText = $"{inputText}{parameter}";
+                Operator = parameter.ToString();
+                inputText = "";
+            }
             return;
         }
-
-        private void ResultButtonCommandExecute(object parameter)
+            /*
+            * @brief = 버튼을 누르면 ResultTextBox에 식이 입력되고, InputTextBox에 결과값이 입력됩니다.  
+            * @param parameter: 사용되지 않음
+            * @return 반환값 없음
+            * @note Patch-notes
+            * 2023-08-10|조예원|설명작성
+            * @warning 없음
+            */
+            private void ResultButtonCommandExecute(object parameter)
         {
+            
 
-            rightOperand = double.Parse(inputText);
-            ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
-
-
-            if (Operator == "/")
+            if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(Operator))
             {
-                result = leftOperand / rightOperand;
-                InputText = result.ToString();
+                rightOperand = double.Parse(inputText);
+                ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
 
-
+                if (Operator == "/")
+                {
+                    
+                    result = leftOperand / rightOperand;
+                    InputText = result.ToString();
+                    if (rightOperand == 0)
+                    {
+                        InputText = "Error: Divide by zero";
+                    }
+                }
+                else if (Operator == "-")
+                {
+                    result = leftOperand - rightOperand;
+                    InputText = result.ToString();
+                }
+                else if (Operator == "+")
+                {
+                    result = leftOperand + rightOperand;
+                    InputText = result.ToString();
+                }
+                else if (Operator == "x")
+                {
+                    result = leftOperand * rightOperand;
+                    InputText = result.ToString();
+                }
             }
-            else if (Operator == "-")
-            {
-                result = leftOperand - rightOperand;
-                InputText = result.ToString();
-            }
-            else if (Operator == "+")
-            {
-                result = leftOperand + rightOperand;
-                InputText = result.ToString();
-            }
-            else if (Operator == "x")
-            {
-                result = leftOperand * rightOperand;
-                InputText = result.ToString();
-
-            }
-
+            // 결과를 표시하지 않는 경우에도 피연산자 초기화
+            leftOperand = 0;
+            rightOperand = 0;
+            Operator = "";
         }
+
+
+        /*
+        * @brief C 버튼을 누르면 InputTextBox와 ResultTextBox가 비워집니다.  
+        * @param parameter: 사용되지 않음
+        * @return 반환값 없음
+        * @note Patch-notes
+        * 2023-08-10|조예원|설명작성
+        * @warning 없음
+        */
         private void ClearButtonCommandExecute(object parameter)
         {
             InputText = "";
@@ -139,6 +181,14 @@ namespace WpfApp1
             leftOperand = 0;
             rightOperand = 0;
         }
+        /*
+        * @brief 바뀐 프로퍼티가 있으면 그 변화를 반영합니다.  
+        * @param propertyName: 값이 바뀐 프로퍼티의 이름
+        * @return 반환값 없음
+        * @note Patch-notes
+        * 2023-08-10|조예원|설명작성
+        * @warning 없음
+        */
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
