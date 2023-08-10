@@ -12,6 +12,8 @@ namespace WpfApp1
 
     public class CalculatorViewModel : INotifyPropertyChanged
     {
+    
+       
         #region [상수]
 
 
@@ -24,7 +26,7 @@ namespace WpfApp1
         private string Operator;
         private string inputText = "";
         private string resultText = "";
-
+        private bool decimalPointEntered = false;
         #endregion
 
         #region [속성]
@@ -70,10 +72,21 @@ namespace WpfApp1
         {
             if (parameter is string number)
             {
-                InputText = $"{inputText}{parameter}";
+                if (number == ".")
+                {
+                    if (!decimalPointEntered)
+                    {
+                        InputText = $"{inputText}{number}";
+                        decimalPointEntered = true;
+                    }
+                }
+                else
+                {
+                    InputText = $"{inputText}{number}";
+                }
             }
-            return;
         }
+
 
         private void OperatorButtonCommandExecute(object parameter)
         {
@@ -81,7 +94,7 @@ namespace WpfApp1
             leftOperand = double.Parse(inputText);
             ResultText = $"{inputText}{parameter}";
             Operator = parameter.ToString();
-
+            decimalPointEntered = false; // 연산자가 입력될 때 소수점 허용 플래그 초기화
             inputText = "";
 
             return;
