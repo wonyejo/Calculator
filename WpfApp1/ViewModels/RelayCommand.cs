@@ -5,36 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1
+
+public class RelayCommand : ICommand
 {
-  
-    public class RelayCommand : ICommand
+    private readonly Action<object> _executeWithParam;
+    private readonly Action _executeWithoutParam;
+    private readonly Func<bool> _canExecute;
+
+    public RelayCommand(Action<object> execute, Func<bool> canExecute = null)
     {
-        private readonly Action<object> _execute;
-       
-        private readonly Func<bool> _canExecute;
+        _executeWithParam = execute ?? throw new ArgumentNullException(nameof(execute));
+        _canExecute = canExecute;
+    }
 
-        public RelayCommand(Action<object> execute, Func<bool> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
+    public RelayCommand(Action execute, Func<bool> canExecute = null)
+    {
+        _executeWithoutParam = execute ?? throw new ArgumentNullException(nameof(execute));
+        _canExecute = canExecute;
+    }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute();
-        }
+    public bool CanExecute(object parameter)
+    {
+        return _canExecute == null || _canExecute();
+    }
 
-        public void Execute(object parameter)
+    public void Execute(object parameter)
+    {
+        if (_executeWithParam != null)
         {
-            _execute(parameter);
+            _executeWithParam(parameter);
         }
-      
-        public event EventHandler CanExecuteChanged
+        else if (_executeWithoutParam != null)
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            _executeWithoutParam();
         }
     }
 
+    public event EventHandler CanExecuteChanged
+    {
+        add { CommandManager.RequerySuggested += value; }
+        remove { CommandManager.RequerySuggested -= value; }
+    }
 }

@@ -12,8 +12,7 @@ namespace WpfApp1
 
     public class CalculatorViewModel : INotifyPropertyChanged
     {
-    
-       
+  
         #region [상수]
 
 
@@ -103,14 +102,13 @@ namespace WpfApp1
         * @warning 없음
         */
 
-       
-
         private void OperatorButtonCommandExecute(object parameter)
         {
+            decimalPointEntered = false;
             if (string.IsNullOrEmpty(Operator))
             {
                 leftOperand = double.Parse(inputText);
-                ResultText = $"{inputText}{parameter}";
+                ResultText = $"{leftOperand}{parameter}";
                 Operator = parameter.ToString();
                 inputText = "";
             }
@@ -125,9 +123,7 @@ namespace WpfApp1
             * @warning 없음
             */
             private void ResultButtonCommandExecute(object parameter)
-        {
-            
-
+            {
             if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(Operator))
             {
                 rightOperand = double.Parse(inputText);
@@ -140,7 +136,9 @@ namespace WpfApp1
                     InputText = result.ToString();
                     if (rightOperand == 0)
                     {
-                        InputText = "Error: Divide by zero";
+                        ResultText = "Error: Divide by zero";
+
+                        
                     }
                 }
                 else if (Operator == "-")
@@ -180,6 +178,8 @@ namespace WpfApp1
             ResultText = "";
             leftOperand = 0;
             rightOperand = 0;
+            Operator = "";
+            decimalPointEntered = false;
         }
         /*
         * @brief 바뀐 프로퍼티가 있으면 그 변화를 반영합니다.  
