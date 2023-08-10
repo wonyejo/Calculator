@@ -12,27 +12,31 @@ namespace WpfApp1
 
     public class CalculatorViewModel : INotifyPropertyChanged
     {
-        #region [변수]
-        private int L_Operand;
-        private int R_Operand;
-        private int result;
-        private string Operator;
+        #region [상수]
+
+
         #endregion
 
+        #region [필드]
+        private double leftOperand;
+        private double rightOperand;
+        private double result;
+        private string Operator;
         private string inputText = "";
-
-        public string InputText
-        {
-            get { return inputText; }
-            set
-            {
-                inputText = value;
-                OnPropertyChanged("inputText");
-            }
-        }
-
         private string resultText = "";
 
+        #endregion
+
+        #region [속성]
+        public string InputText
+            {
+                get { return inputText; }
+                set
+                {
+                    inputText = value;
+                    OnPropertyChanged("inputText");
+                }
+            }
         public string ResultText
         {
             get { return resultText; }
@@ -42,20 +46,25 @@ namespace WpfApp1
                 OnPropertyChanged("resultText");
             }
         }
-        
         public ICommand NumberButtonCommand { get; private set; }
         public ICommand OperatorButtonCommand { get; private set; }
         public ICommand ResultButtonCommand { get; private set; }
         public ICommand ClearButtonCommand { get; private set; }
+        #endregion
 
+        #region [생성자]
         public CalculatorViewModel()
         {
             NumberButtonCommand = new RelayCommand(NumberButtonCommandExecute);
-            OperatorButtonCommand = new RelayCommand(OperatorButtonCommandExecute); 
+            OperatorButtonCommand = new RelayCommand(OperatorButtonCommandExecute);
             ResultButtonCommand = new RelayCommand(ResultButtonCommandExecute);
             ClearButtonCommand = new RelayCommand(ClearButtonCommandExecute);
         }
 
+
+        #endregion
+
+        #region [메서드]
 
         private void NumberButtonCommandExecute(object parameter)
         {
@@ -69,10 +78,10 @@ namespace WpfApp1
         private void OperatorButtonCommandExecute(object parameter)
         {
 
-            L_Operand = int.Parse(inputText);
+            leftOperand = double.Parse(inputText);
             ResultText = $"{inputText}{parameter}";
             Operator = parameter.ToString();
-            
+
             inputText = "";
 
             return;
@@ -80,51 +89,54 @@ namespace WpfApp1
 
         private void ResultButtonCommandExecute(object parameter)
         {
-            
-            R_Operand = int.Parse(inputText);
-            ResultText =$"{L_Operand}{Operator}{R_Operand}{" = "}";
-            
+
+            rightOperand = double.Parse(inputText);
+            ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
+
 
             if (Operator == "/")
             {
-                result = L_Operand / R_Operand;
+                result = leftOperand / rightOperand;
                 InputText = result.ToString();
-               
+
 
             }
             else if (Operator == "-")
             {
-                result = L_Operand - R_Operand;
+                result = leftOperand - rightOperand;
                 InputText = result.ToString();
             }
             else if (Operator == "+")
             {
-                result = L_Operand + R_Operand;
+                result = leftOperand + rightOperand;
                 InputText = result.ToString();
             }
             else if (Operator == "x")
             {
-                result = L_Operand * R_Operand;
+                result = leftOperand * rightOperand;
                 InputText = result.ToString();
 
             }
-            
+
         }
         private void ClearButtonCommandExecute(object parameter)
-        {  
+        {
             InputText = "";
-            ResultText="";
-            L_Operand = 0;
-            R_Operand = 0;
+            ResultText = "";
+            leftOperand = 0;
+            rightOperand = 0;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #endregion
+
+        #region [중첩된 클래스]
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+       
     }
 
 }
