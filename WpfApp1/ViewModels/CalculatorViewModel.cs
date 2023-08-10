@@ -131,14 +131,15 @@ namespace WpfApp1
 
                 if (Operator == "/")
                 {
-           
-                    result = leftOperand / rightOperand;
-                    InputText = result.ToString();
-                    if (rightOperand == 0)
+
+                    try
+                    {
+                        result = leftOperand / rightOperand;
+                        InputText = result.ToString();
+                    }
+                    catch (DivideByZeroException)
                     {
                         ResultText = "Error: Divide by zero";
-
-
                     }
                 }
                 else if (Operator == "-")
