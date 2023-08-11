@@ -107,10 +107,19 @@ namespace WpfApp1
             doublePointEntered = false;
             if (string.IsNullOrEmpty(Operator))
             {
-                leftOperand = decimal.Parse(inputText);
-                ResultText = $"{leftOperand}{parameter}";
-                Operator = parameter.ToString();
-                inputText = "";
+                try
+                { 
+                    leftOperand = decimal.Parse(inputText);
+                    ResultText = $"{leftOperand}{parameter}";
+                    Operator = parameter.ToString();
+                    inputText = "";
+                   
+                }
+                catch (FormatException)
+                {
+                    ResultText = "Error: Wrong Value";
+                }
+               
             }
             return;
         }
@@ -126,12 +135,19 @@ namespace WpfApp1
             {
             if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(Operator))
             {
-                rightOperand = decimal.Parse(inputText);
-                ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
+                try
+                {
+                    rightOperand = decimal.Parse(inputText);
+                    ResultText = $"{leftOperand}{Operator}{rightOperand}{" = "}";
+
+                }
+                catch (FormatException)
+                {
+                    ResultText = "Error: Wrong Value";
+                }
 
                 if (Operator == "/")
                 {
-
                     try
                     {
                         result = leftOperand / rightOperand;
