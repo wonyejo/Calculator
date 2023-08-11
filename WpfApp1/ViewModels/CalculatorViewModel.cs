@@ -102,7 +102,7 @@ namespace WpfApp1
         * @warning 없음
         */
 
-        private void OperatorButtonCommandExecute(object parameter)
+        public void OperatorButtonCommandExecute(object parameter)
         {
             doublePointEntered = false;
             if (string.IsNullOrEmpty(Operator))
