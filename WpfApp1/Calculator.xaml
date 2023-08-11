@@ -14,6 +14,7 @@
     
     <Grid>
         <TextBox x:Name="ResultTextBox" 
+                 Style="{StaticResource textBox_style}"
 				 TextAlignment="Right" 
 				 HorizontalAlignment="Left"
 				 Width="253" Height="23"
@@ -22,6 +23,7 @@
 				 Margin="22,93,0,0"/>
 		
         <TextBox  x:Name="InputTextBox" 
+                  Style="{StaticResource textBox_style}"
                   TextAlignment="Right" 
                   HorizontalAlignment="Left" 
                   Width="253" Height="48" 
@@ -34,24 +36,24 @@
             <Button Content="%"   />
             <Button Content="CE" />
             <Button Content="C" Command="{Binding ClearButtonCommand}" />
-            <Button Content="7" Command="{Binding NumberButtonCommand}" CommandParameter="7"   />
-            <Button Content="8"  Command="{Binding NumberButtonCommand}" CommandParameter="8" />
-            <Button Content="9"  Command="{Binding NumberButtonCommand}" CommandParameter="9" />
-            <Button Content="4"  Command="{Binding NumberButtonCommand}" CommandParameter="4" />
-            <Button Content="5"  Command="{Binding NumberButtonCommand}" CommandParameter="5" />
-            <Button Content="6"  Command="{Binding NumberButtonCommand}" CommandParameter="6"  />
-            <Button Content="1"  Command="{Binding NumberButtonCommand}" CommandParameter="1"  />
-            <Button Content="2" Command="{Binding NumberButtonCommand}" CommandParameter="2"  />
-            <Button Content="3"  Command="{Binding NumberButtonCommand}" CommandParameter="3"  />
+            <Button Content="7"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="7"   />
+            <Button Content="8"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="8" />
+            <Button Content="9"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="9" />
+            <Button Content="4"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="4" />
+            <Button Content="5"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="5" />
+            <Button Content="6"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="6"  />
+            <Button Content="1"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="1"  />
+            <Button Content="2" Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="2"  />
+            <Button Content="3"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="3"  />
             <Button Content="+/-"  />
-            <Button Content="0"  Command="{Binding NumberButtonCommand}" CommandParameter="0"  />
+            <Button Content="0"  Background="LawnGreen" Command="{Binding NumberButtonCommand}" CommandParameter="0"  />
             <Button Content="." Command="{Binding NumberButtonCommand}" CommandParameter="."/>
         </WrapPanel>
         <StackPanel HorizontalAlignment="Left" Height="182" VerticalAlignment="Top" Width="80" Margin="212,185,0,0">
-            <Button Content="/" Command="{Binding OperatorButtonCommand}" CommandParameter="/" />
-            <Button Content="x" Command="{Binding OperatorButtonCommand}" CommandParameter="x"/>
-            <Button Content="-" Command="{Binding OperatorButtonCommand}" CommandParameter="-"/>
-            <Button Content="+" Command="{Binding OperatorButtonCommand}" CommandParameter="+"/>
+            <Button Content="/" Background="SpringGreen" Command="{Binding OperatorButtonCommand}" CommandParameter="/" />
+            <Button Content="x" Background="SpringGreen" Command="{Binding OperatorButtonCommand}" CommandParameter="x"/>
+            <Button Content="-" Background="SpringGreen" Command="{Binding OperatorButtonCommand}" CommandParameter="-"/>
+            <Button Content="+" Background="SpringGreen" Command="{Binding OperatorButtonCommand}" CommandParameter="+"/>
             <Button Content="=" Background="LightGreen" Command="{Binding ResultButtonCommand}" />
 
         </StackPanel>
