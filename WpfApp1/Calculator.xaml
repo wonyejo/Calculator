@@ -8,11 +8,20 @@
       d:DesignHeight="400"
       d:DesignWidth="300"
       Title="Calculator">
+
     <Page.DataContext>
         <local:CalculatorViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
+        <Button x:Name="HistoryBtn"
+                Content="🕐" Width="Auto" Height="30"
+			    Background="white"
+				VerticalAlignment="Top"
+				Margin="227,32,10,0"
+                Command="{Binding ShowHistoryCommand}"/>
+        
+        
         <TextBox x:Name="ResultTextBox" 
                  Style="{StaticResource textBox_style}"
 				 TextAlignment="Right" 
@@ -21,7 +30,7 @@
 				 TextWrapping="Wrap" Text="{Binding ResultText, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
 				 VerticalAlignment="Top"
 				 Margin="22,93,0,0"/>
-		
+
         <TextBox  x:Name="InputTextBox" 
                   Style="{StaticResource textBox_style}"
                   TextAlignment="Right" 
@@ -32,7 +41,7 @@
                   VerticalAlignment="Top" />
 
         <WrapPanel HorizontalAlignment="Left" Height="180" Margin="22,185,0,0" VerticalAlignment="Top" Width="190" RenderTransformOrigin="0.5,0.5">
-           
+
             <Button Content="%"   />
             <Button Content="CE" />
             <Button Content="C" Command="{Binding ClearButtonCommand}" />
@@ -57,7 +66,7 @@
             <Button Content="=" Background="LightGreen" Command="{Binding ResultButtonCommand}" />
 
         </StackPanel>
-        
+
 
     </Grid>
 </Page>

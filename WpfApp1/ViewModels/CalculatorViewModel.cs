@@ -12,13 +12,16 @@ namespace WpfApp1
 
     public class CalculatorViewModel : INotifyPropertyChanged
     {
-  
-        #region [상수]
 
+        #region [상수]
 
         #endregion
 
         #region [필드]
+        private Stack<double> operandStack = new Stack<double>();
+        private Stack<char> operatorStack = new Stack<char>();
+
+
         private decimal leftOperand;
         private decimal rightOperand;
         private decimal result;
@@ -30,14 +33,14 @@ namespace WpfApp1
 
         #region [속성]
         public string InputText
+        {
+            get { return inputText; }
+            set
             {
-                get { return inputText; }
-                set
-                {
-                    inputText = value;
-                    OnPropertyChanged("inputText");
-                }
+                inputText = value;
+                OnPropertyChanged("inputText");
             }
+        }
         public string ResultText
         {
             get { return resultText; }
@@ -51,6 +54,8 @@ namespace WpfApp1
         public ICommand OperatorButtonCommand { get; private set; }
         public ICommand ResultButtonCommand { get; private set; }
         public ICommand ClearButtonCommand { get; private set; }
+        public ICommand ShowHistoryCommand { get; private set; }
+
         #endregion
 
         #region [생성자]
@@ -60,6 +65,7 @@ namespace WpfApp1
             OperatorButtonCommand = new RelayCommand(OperatorButtonCommandExecute);
             ResultButtonCommand = new RelayCommand(ResultButtonCommandExecute);
             ClearButtonCommand = new RelayCommand(ClearButtonCommandExecute);
+            ShowHistoryCommand = new RelayCommand(ShowHistoryExecute);
         }
 
 
@@ -74,6 +80,12 @@ namespace WpfApp1
         * 2023-08-10|조예원|설명작성
         * @warning 없음
         */
+
+
+
+
+
+
         private void NumberButtonCommandExecute(object parameter)
         {
             if (parameter is string number)
@@ -107,32 +119,34 @@ namespace WpfApp1
             doublePointEntered = false;
             if (string.IsNullOrEmpty(Operator))
             {
+                ResultButtonCommandExecute(null);
                 try
-                { 
+                {
                     leftOperand = decimal.Parse(inputText);
                     ResultText = $"{leftOperand}{parameter}";
                     Operator = parameter.ToString();
                     inputText = "";
-                   
+
                 }
                 catch (FormatException)
                 {
                     ResultText = "Error: Wrong Value";
                 }
-               
+
             }
             return;
         }
-            /*
-            * @brief = 버튼을 누르면 ResultTextBox에 식이 입력되고, InputTextBox에 결과값이 입력됩니다.  
-            * @param parameter: 사용되지 않음
-            * @return 반환값 없음
-            * @note Patch-notes
-            * 2023-08-10|조예원|설명작성
-            * @warning 없음
-            */
-            private void ResultButtonCommandExecute(object parameter)
-            {
+        /*
+        * @brief = 버튼을 누르면 ResultTextBox에 식이 입력되고, InputTextBox에 결과값이 입력됩니다.  
+        * @param parameter: 사용되지 않음
+        * @return 반환값 없음
+        * @note Patch-notes
+        * 2023-08-10|조예원|설명작성
+        * @warning 없음
+        */
+        private void ResultButtonCommandExecute(object parameter)
+        {
+
             if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrEmpty(Operator))
             {
                 try
@@ -211,12 +225,20 @@ namespace WpfApp1
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void ShowHistoryExecute(object parameter)
+        {
+            History history = new History();
+            history.ShowDialog();
+        }
+
+
         #endregion
 
         #region [중첩된 클래스]
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
-       
+
+
     }
 
 }
